@@ -1,8 +1,9 @@
 npm init
 npm i express mongoose concurrently
-
-  Мне нравится автоматизация задач с помощью npm, но обычный способ одновременного запуска нескольких команд 
-  - это npm run watch-js и npm run watch-css. Это нормально, но сложно отслеживать разные результаты. 
-  Кроме того, если один процесс не работает, другие продолжают работать, и вы даже не заметите разницы.
-
 npm i -D nodemon
+// client
+npm i -g create-react-app
+npx create-react-app .
+npm i bootstrap reactstrap uuid react-transition-group
+// https://reactstrap.github.io/components/listgroup/
+npm i redux react-redux redux-thunk 
