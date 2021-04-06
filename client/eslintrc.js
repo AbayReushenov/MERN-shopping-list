@@ -19,5 +19,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'react/destructuring-assignment': ['error', 'always', { ignoreClassFields: true }],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
   },
 };

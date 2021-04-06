@@ -7,3 +7,5 @@ npx create-react-app .
 npm i bootstrap reactstrap uuid react-transition-group
 // https://reactstrap.github.io/components/listgroup/
 npm i redux react-redux redux-thunk 
+
+// 6 lesson next
