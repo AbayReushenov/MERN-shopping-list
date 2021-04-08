@@ -9,3 +9,5 @@ npm i bootstrap reactstrap uuid react-transition-group
 npm i redux react-redux redux-thunk 
 npm i axios
 
+// server подготовка к deploy
+ npm i path
