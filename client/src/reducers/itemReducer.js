@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 // https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers
 import {
   ADD_ITEM,
