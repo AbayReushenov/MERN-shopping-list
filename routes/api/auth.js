@@ -57,7 +57,7 @@ router.get('/user', authentication, (req, res) => {
   User.findById(req.user.id)
     .select('-password')
     .then((user) => res.json(user));
-    // отправляем данные подьзователя за вычетом PASSWORD
+    // отправляем данные пользователя за вычетом PASSWORD
 });
 
 module.exports = router;
