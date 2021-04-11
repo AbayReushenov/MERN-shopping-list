@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authentication = require('../../middleware/auth');
 
 // DATA MODEL
 const DataData = require('../../models/Data');
@@ -15,9 +16,9 @@ router.get('/', (req, res) => {
 
 // @route  POST api/data
 // @desc   Create a data
-// @access Public
+// @access Private
 
-router.post('/', (req, res) => {
+router.post('/', authentication, (req, res) => {
   const newData = new DataData({
     name: req.body.name,
   });
@@ -26,9 +27,9 @@ router.post('/', (req, res) => {
 
 // @route  DELETE api/data/:id
 // @desc   delete a post
-// @access Public
+// @access Private
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authentication, (req, res) => {
   DataData.findById(req.params.id)
     .then((oneid) => oneid.remove().then(() => res.json({ success: true })))
     .catch((err) => res.status(404).json({ success: false }));

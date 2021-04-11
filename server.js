@@ -1,8 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-
-const dataroute = require('./routes/api/datadata');
+const config = require('config');
 
 const app = express();
 
@@ -14,16 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // DB Config
-const db = require('./config/keys').mongoURI;
+const db = config.get('mymongoURI');
 
 // connect to Mongo
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(db, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected ...'))
   .catch((err) => console.log(err));
 
 // Use Routes
-app.use('/api/data', dataroute); // перенаправление на другой маршрут
+app.use('/api/data', require('./routes/api/datadata')); // перенаправление на другой маршрут
+app.use('/api/users', require('./routes/api/users')); // перенаправление на другой маршрут
+app.use('/api/auth', require('./routes/api/auth')); // перенаправление на другой маршрут
 
 // только для PRODUCTION ===>>>
 if (process.env.NODE_ENV === 'production') {
