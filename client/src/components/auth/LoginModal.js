@@ -12,16 +12,15 @@ import {
   Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { login } from '../../flux/actions/authActions';
-import { clearErrors } from '../../flux/actions/errorActions';
-import { ILoginModal, ITarget, IAuthReduxProps } from '../../types/interfaces';
+import { login } from '../../actions/authActions';
+import { clearErrors } from '../../actions/errorActions';
 
 const LoginModal = ({
   isAuthenticated,
   error,
   login,
   clearErrors
-}: ILoginModal) => {
+}) => {
   const [modal, setModal] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,10 +32,10 @@ const LoginModal = ({
     setModal(!modal);
   }, [clearErrors, modal]);
 
-  const handleChangeEmail = (e: ITarget) => setEmail(e.target.value);
-  const handleChangePassword = (e: ITarget) => setPassword(e.target.value);
+  const handleChangeEmail = (e) => setEmail(e.target.value);
+  const handleChangePassword = (e) => setPassword(e.target.value);
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
 
     const user = { email, password };
@@ -108,7 +107,7 @@ const LoginModal = ({
   );
 };
 
-const mapStateToProps = (state: IAuthReduxProps) => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error
 });

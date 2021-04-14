@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -7,32 +6,53 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  // NavLink,
-  Container,
+  Container
 } from 'reactstrap';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import RegisterModal from './auth/RegisterModal';
+import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
 
-const AppNavbar = () => {
+const AppNavbar = ({ auth }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  const handleToggle = () => setIsOpen(!isOpen);
+
+  const authLinks = (
+    <Fragment>
+      <NavItem>
+        <span className="navbar-text mr-3">
+          <strong>
+            {auth && auth.user ? `Welcome ${auth.user.name}` : ''}
+          </strong>
+        </span>
+      </NavItem>
+      <NavItem>
+        <Logout />
+      </NavItem>
+    </Fragment>
+  );
+
+  const guestLinks = (
+    <Fragment>
+      <NavItem>
+        <RegisterModal />
+      </NavItem>
+      <NavItem>
+        <LoginModal />
+      </NavItem>
+    </Fragment>
+  );
 
   return (
     <div>
-      <Navbar color="dark" dark expand="sm" className="md-5">
+      <Navbar color="dark" dark expand="sm" className="mb-5">
         <Container>
           <NavbarBrand href="/">ShoppingList</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
+          <NavbarToggler onClick={handleToggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <RegisterModal />
-              </NavItem>
-              <NavItem>
-                <Logout />
-              </NavItem>
+              {auth && auth.isAuthenticated ? authLinks : guestLinks}
             </Nav>
           </Collapse>
         </Container>
@@ -41,4 +61,8 @@ const AppNavbar = () => {
   );
 };
 
-export default AppNavbar;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(AppNavbar);

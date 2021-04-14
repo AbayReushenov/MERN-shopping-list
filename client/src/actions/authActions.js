@@ -32,8 +32,6 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
-
-
 // Register User
 export const register = ({ name, email, password }) => (
   dispatch
@@ -62,6 +60,38 @@ export const register = ({ name, email, password }) => (
       );
       dispatch({
         type: REGISTER_FAIL
+      });
+    });
+};
+
+// Login User
+export const login = ({ email, password }) => (
+  dispatch
+) => {
+  // Headers
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  // Request body
+  const body = JSON.stringify({ email, password });
+
+  axios
+    .post('/api/auth', body, config)
+    .then(res =>
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
+      );
+      dispatch({
+        type: LOGIN_FAIL
       });
     });
 };

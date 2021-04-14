@@ -1,60 +1,54 @@
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable object-curly-newline */
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable no-alert */
-/* eslint-disable react/destructuring-assignment */
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { getItems, deleteItem } from '../actions/itemActions';
 
-class ShoppingList extends Component {
-  componentDidMount() {
-    this.props.getItems();
-  }
+const ShoppingList = ({
+  getItems,
+  item,
+  isAuthenticated,
+  deleteItem
+}) => {
+  useEffect(() => {
+    getItems();
+  }, [getItems]);
 
-  onDeleteClick = (_id) => {
-    this.props.deleteItem(_id);
+  const handleDelete = (id) => {
+    deleteItem(id);
   };
 
-  render() {
-    const { items } = this.props.item;
-    return (
-      <Container style={{ marginTop: '2rem' }}>
-        <ListGroup style={{ marginBottom: '1rem' }}>
-          <TransitionGroup className="shopping-list">
-            {items.map(({ _id, name }) => (
-              <CSSTransition key={_id} timeout={500} classNames="fade">
-                <ListGroupItem>
+  const { items } = item;
+  return (
+    <Container>
+      <ListGroup>
+        <TransitionGroup className="shopping-list">
+          {items.map(({ _id, name }) => (
+            <CSSTransition key={_id} timeout={500} classNames="fade">
+              <ListGroupItem>
+                {isAuthenticated ? (
                   <Button
                     className="remove-btn"
                     color="danger"
                     size="sm"
-                    onClick={this.onDeleteClick.bind(this, _id)}
+                    onClick={() => handleDelete(_id)}
                   >
                     &times;
                   </Button>
-                  {name}
-                </ListGroupItem>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-        </ListGroup>
-      </Container>
-    );
-  }
-}
-
-ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  deleteItem: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
+                ) : null}
+                {name}
+              </ListGroupItem>
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+      </ListGroup>
+    </Container>
+  );
 };
+
 const mapStateToProps = (state) => ({
   item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList);
