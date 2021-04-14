@@ -70,16 +70,16 @@ const RegisterModal = ({
   return (
     <div>
       <NavLink onClick={handleToggle} href="#">
-        Register
+        Регистрация
       </NavLink>
 
       <Modal isOpen={modal} toggle={handleToggle}>
-        <ModalHeader toggle={handleToggle}>Register</ModalHeader>
+        <ModalHeader toggle={handleToggle}>Регистрация</ModalHeader>
         <ModalBody>
           {msg ? <Alert color="danger">{msg}</Alert> : null}
           <Form onSubmit={handleOnSubmit}>
             <FormGroup>
-              <Label for="name">Name</Label>
+              <Label for="name">Ваше имя</Label>
               <Input
                 type="text"
                 name="name"
@@ -99,17 +99,17 @@ const RegisterModal = ({
                 onChange={handleChangeEmail}
               />
 
-              <Label for="password">Password</Label>
+              <Label for="password">Пароль</Label>
               <Input
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Password"
+                placeholder="Пароль минимум 6 знаков, все очень строго"
                 className="mb-3"
                 onChange={handleChangePassword}
               />
               <Button color="dark" style={{ marginTop: '2rem' }} block>
-                Register
+                Отправить данные для регистрации
               </Button>
             </FormGroup>
           </Form>

@@ -1,8 +1,3 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable react/jsx-filename-extension */
 import React, { useEffect } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css/';

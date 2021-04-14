@@ -63,31 +63,31 @@ const LoginModal = ({
   return (
     <div>
       <NavLink onClick={handleToggle} href="#">
-        Login
+        Вход
       </NavLink>
 
       <Modal isOpen={modal} toggle={handleToggle}>
-        <ModalHeader toggle={handleToggle}>Login</ModalHeader>
+        <ModalHeader toggle={handleToggle}>Введите Ваш имейл и пароль</ModalHeader>
         <ModalBody>
           {msg ? <Alert color="danger">{msg}</Alert> : null}
           <Form>
             <FormGroup>
-              <Label for="email">Email</Label>
+              <Label for="email">Имейл</Label>
               <Input
                 type="email"
                 name="email"
                 id="email"
-                placeholder="Email"
+                placeholder="Email по всей форме"
                 className="mb-3"
                 onChange={handleChangeEmail}
               />
 
-              <Label for="password">Password</Label>
+              <Label for="password">Пароль</Label>
               <Input
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Password"
+                placeholder="пароль, минимум 6 знаков"
                 className="mb-3"
                 onChange={handleChangePassword}
               />
@@ -97,7 +97,7 @@ const LoginModal = ({
                 block
                 onClick={handleOnSubmit}
               >
-                Login
+                Отправить
               </Button>
             </FormGroup>
           </Form>

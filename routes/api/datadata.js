@@ -11,7 +11,8 @@ const DataData = require('../../models/Data');
 router.get('/', (req, res) => {
   DataData.find()
     .sort({ date: -1 })
-    .then((datadata) => res.json(datadata));
+    .then((datadata) => res.status(200).json(datadata))
+    .catch((err) => res.status(400).json({ msg: err.message }));
 });
 
 // @route  POST api/data

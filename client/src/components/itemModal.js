@@ -44,7 +44,7 @@ const ItemModal = ({ isAuthenticated, addItem }) => {
           Add Item
         </Button>
       ) : (
-        <h4 className="mb-3 ml-4">Please log in to manage items</h4>
+        <h4 className="mb-3 ml-4">Можно добавить и удалить, но только после регистрации ..</h4>
       )}
 
       <Modal isOpen={modal} toggle={handleToggle}>
