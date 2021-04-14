@@ -1,16 +1,16 @@
-import { POLUCHITE_OSHIBKI, OCHISTITE_OSHIBKI } from './types';
+import { GET_ERRORS, CLEAR_ERRORS } from './types';
 
-// return errors
+// RETURN ERRORS
 export const returnErrors = (msg, status, id = null) => {
   return {
-    type: POLUCHITE_OSHIBKI,
+    type: GET_ERRORS,
     payload: { msg, status, id },
   };
 };
 
-// clear errors
+// CLEAR ERRORS
 export const clearErrors = () => {
   return {
-    type: OCHISTITE_OSHIBKI,
+    type: CLEAR_ERRORS,
   };
 };
