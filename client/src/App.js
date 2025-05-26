@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css/';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { Container } from 'reactstrap';
 import AppNavBar from './components/AppNavbar';
@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
-  
+
   return (
     <Provider store={store}>
       <div className="App">
